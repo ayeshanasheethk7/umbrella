@@ -82,7 +82,10 @@ export async function searchPatientsAction(rawQuery: string): Promise<ActionResp
     const qp = () => supabase.from('patient_profiles').select(SF);
     let res;
     if (cls.type === 'patient_code') res = await qp().ilike('patient_code', cls.sanitized).limit(20);
-    else if (cls.type === 'qr_token') res = await qp().eq('qr_token', cls.sanitized).limit(20);
+    else if (cls.type === 'qr_token') {
+      res = await qp().eq('qr_token', cls.sanitized).limit(20);
+      if (!res.data || res.data.length === 0) res = await qp().eq('patient_id', cls.sanitized).limit(20);
+    }
     else if (cls.type === 'phone') {
       const [acc, em] = await Promise.all([
         qp().ilike('accounts.contact_phone', `%${cls.sanitized}%`).limit(20),
@@ -139,7 +142,7 @@ export async function updateClinicalRecordAction(rawData: unknown): Promise<Acti
     if (!data) {
       const { data: ex } = await sb.from('clinical_records').select('updated_at').eq('patient_id', pid).maybeSingle();
       if (ex && ex.updated_at !== expectedUpdatedAt) {
-        return { ok: false, conflict: true, error: 'Clinical Record Conflict: Stale record timestamp detected. Please reload.' };
+        return { ok: false, conflict: true, error: 'Clinical Record Conflict: Stale record timestamp. Please reload.' };
       }
       return fail('Record not found.');
     }

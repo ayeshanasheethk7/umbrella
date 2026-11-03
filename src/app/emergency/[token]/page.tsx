@@ -47,8 +47,9 @@ export default async function EmergencyTriagePage({ params }: EmergencyPageProps
     notFound();
   }
 
-  // 1. Fast UUID format validation before issuing database query
-  const uuidResult = uuidSchema.safeParse(token);
+  // 1. Fast UUID format validation before issuing database query (clean spaces or URL encodings)
+  const cleanToken = decodeURIComponent(token).trim().replace(/^\{|\}$/g, '');
+  const uuidResult = uuidSchema.safeParse(cleanToken);
   if (!uuidResult.success) {
     notFound();
   }

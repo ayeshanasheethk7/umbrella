@@ -95,7 +95,7 @@ export const PatientSearchBar: React.FC<PatientSearchBarProps> = ({
   const getSearchHint = () => {
     const t = query.trim();
     if (/^UMB-[A-Za-z0-9]{0,6}$/i.test(t)) return 'Searching by Patient Code';
-    if (/^[0-9a-f-]{10,}$/i.test(t)) return 'Searching by QR Token';
+    if (/^[0-9a-f-]{10,}$/i.test(t)) return 'Searching by Patient UUID / QR Token';
     if (t.replace(/\D/g, '').length >= 7) return 'Searching by Phone Number';
     if (t.length >= 2) return 'Searching by Patient Name';
     return null;

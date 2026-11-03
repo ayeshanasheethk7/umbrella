@@ -35,12 +35,12 @@ export default function EmergencyNotFound() {
             If this is a life-threatening medical emergency or roadside collision, contact emergency response services immediately.
           </p>
           <a
-            href="tel:911"
+            href="tel:112"
             className="w-full min-h-[56px] min-w-[56px] bg-clinical-critical hover:opacity-95 active:scale-[0.98] text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 text-base shadow-sm transition-transform select-none cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-clinical-critical/30"
-            aria-label="Call 911 Emergency Services Immediately"
+            aria-label="Call 112 Emergency Services Immediately"
           >
             <Phone className="w-5 h-5 shrink-0 fill-current" aria-hidden="true" />
-            <span>Call 911 / Emergency Services</span>
+            <span>Call 112 / Emergency Services</span>
           </a>
         </div>
       </div>

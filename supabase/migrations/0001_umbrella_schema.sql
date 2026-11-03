@@ -63,6 +63,10 @@ create table public.clinical_records (
   updated_at timestamptz not null default now()
 );
 
+alter table public.clinical_records
+  add constraint fk_clinical_records_patient_profiles
+  foreign key (patient_id) references public.patient_profiles(patient_id) on delete cascade;
+
 -- Table 4: public.appointments
 -- Appointments scheduled between approved clinicians and patients (D6: on delete restrict)
 create table public.appointments (
@@ -344,7 +348,7 @@ returns jsonb language sql stable security definer set search_path = '' as $$
   from public.patient_profiles p
   join public.accounts a on a.id = p.patient_id
   left join public.clinical_records c on c.patient_id = p.patient_id
-  where p.qr_token = lookup_token;
+  where p.qr_token = lookup_token or p.patient_id = lookup_token;
 $$;
 revoke all on function public.get_emergency_triage_by_token(uuid) from public, anon, authenticated;
 grant execute on function public.get_emergency_triage_by_token(uuid) to anon, authenticated;
