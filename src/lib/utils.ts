@@ -44,8 +44,14 @@ export function safeNext(url: string | null | undefined, fallback: string = '/po
     return fallback;
   }
 
-  // Reject protocol-relative URLs (//) or backslash evasion (/\ or \/)
-  if (trimmed.startsWith('//') || trimmed.startsWith('/\\') || trimmed.includes('\\')) {
+  // Reject protocol-relative URLs (//) or backslash evasion (/\ or \/) or path traversal
+  if (
+    trimmed.startsWith('//') ||
+    trimmed.startsWith('/\\') ||
+    trimmed.includes('\\') ||
+    trimmed.startsWith('/.') ||
+    trimmed.includes('/..')
+  ) {
     return fallback;
   }
 
@@ -67,11 +73,10 @@ export function safeNext(url: string | null | undefined, fallback: string = '/po
  */
 export function sanitizeTel(phone: string): string {
   if (!phone) return '';
-  const trimmed = phone.trim();
-  const hasLeadingPlus = trimmed.startsWith('+');
-  const digits = trimmed.replace(/\D/g, '');
+  const hasPlus = phone.includes('+');
+  const digits = phone.replace(/\D/g, '');
   if (!digits) return '';
-  return hasLeadingPlus ? `+${digits}` : digits;
+  return hasPlus ? `+${digits}` : digits;
 }
 
 /**

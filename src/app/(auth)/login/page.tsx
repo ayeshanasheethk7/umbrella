@@ -141,7 +141,7 @@ function LoginForm() {
         </form>
 
         <div className="mt-6 text-center text-sm text-text-body-secondary border-t border-black/5 pt-5">
-          Don't have an Umbrella account?{' '}
+          Don&apos;t have an Umbrella account?{' '}
           <Link
             href="/signup"
             className="font-medium text-accent-action hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-action rounded-sm"

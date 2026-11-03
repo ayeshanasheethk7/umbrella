@@ -7,7 +7,7 @@ import {
   classifySearchQuery,
   mapPatientSearchRow,
   type SearchRow,
-} from '@/app/portal/doctor/actions';
+} from '@/lib/doctor-search';
 
 describe('Tier 1: Doctor Actions Pure Logic — Happy-Path Isolation', () => {
   it('T1-ESC-01: preserves standard alphanumeric clinician queries', () => {

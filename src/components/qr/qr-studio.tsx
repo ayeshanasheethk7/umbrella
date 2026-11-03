@@ -302,7 +302,7 @@ export const QrStudio: React.FC<QrStudioProps> = ({
             </Button>
             <Button
               type="button"
-              variant="danger"
+              variant="destructive"
               onClick={handleConfirmRotation}
               isLoading={isRotating}
               disabled={isRotating}

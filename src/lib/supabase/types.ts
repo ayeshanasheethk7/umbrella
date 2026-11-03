@@ -283,7 +283,9 @@ export interface Database {
         ];
       };
     };
-    Views: Record<string, never>;
+    Views: {
+      [_ in never]: never;
+    };
     Functions: {
       get_emergency_triage_by_token: {
         Args: {
@@ -310,7 +312,9 @@ export interface Database {
     Enums: {
       user_role: UserRole;
     };
-    CompositeTypes: Record<string, never>;
+    CompositeTypes: {
+      [_ in never]: never;
+    };
   };
 }
 

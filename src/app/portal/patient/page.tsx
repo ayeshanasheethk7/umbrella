@@ -166,7 +166,7 @@ export default async function PatientPortalPage() {
             email={account.email}
             patientCode={profile.patient_code}
             age={profile.age}
-            bloodGroup={profile.bloodGroup || profile.blood_group}
+            bloodGroup={profile.blood_group}
             isDoctorVerified={clinical.is_doctor_verified}
           />
         </div>
@@ -176,7 +176,7 @@ export default async function PatientPortalPage() {
             initialQrToken={profile.qr_token}
             patientCode={profile.patient_code}
             patientName={account.full_name}
-            bloodGroup={profile.bloodGroup || profile.blood_group}
+            bloodGroup={profile.blood_group}
             emergencyContactName={profile.emergency_contact_name}
             emergencyContactPhone={profile.emergency_contact_phone}
             emergencyContactRelation={profile.emergency_contact_relation}
@@ -223,7 +223,7 @@ export default async function PatientPortalPage() {
             initialFullName={account.full_name}
             initialContactPhone={account.contact_phone}
             initialAge={profile.age}
-            initialBloodGroup={profile.bloodGroup || profile.blood_group}
+            initialBloodGroup={profile.blood_group}
             initialEmergencyContactName={profile.emergency_contact_name}
             initialEmergencyContactPhone={profile.emergency_contact_phone}
             initialEmergencyContactRelation={profile.emergency_contact_relation}

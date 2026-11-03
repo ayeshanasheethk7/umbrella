@@ -26,19 +26,19 @@ export async function verifyApprovedDoctor(): Promise<DocAuth> {
   return { ok: true, data: { user: { id: user.id, email: user.email }, account: acc as AccountRow } };
 }
 
-export function escapeSearchTerm(t: string): string {
+function escapeSearchTerm(t: string): string {
   return (t || '').replace(/\\/g, '\\\\').replace(/[%_(),]/g, '').trim();
 }
 
-export type SearchQueryType = 'patient_code' | 'qr_token' | 'phone' | 'name' | 'invalid';
-export const PATIENT_CODE_REGEX = /^UMB-[A-Za-z0-9]{6}$/i;
-export const QR_TOKEN_UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+type SearchQueryType = 'patient_code' | 'qr_token' | 'phone' | 'name' | 'invalid';
+const PATIENT_CODE_REGEX = /^UMB-[A-Za-z0-9]{6}$/i;
+const QR_TOKEN_UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-export function extractPhoneDigits(query: string): string {
+function extractPhoneDigits(query: string): string {
   return (query || '').replace(/\D/g, '');
 }
 
-export function classifySearchQuery(rawQuery: string): { type: SearchQueryType; sanitized: string } {
+function classifySearchQuery(rawQuery: string): { type: SearchQueryType; sanitized: string } {
   const q = (rawQuery || '').trim();
   if (q.length < 2 || q.length > 100) return { type: 'invalid', sanitized: '' };
   if (PATIENT_CODE_REGEX.test(q)) return { type: 'patient_code', sanitized: q.toUpperCase() };
@@ -60,14 +60,13 @@ export interface SearchRow extends PatientBase {
   accounts: { id?: string; full_name: string; contact_phone: string } | null;
   clinical_records: { is_doctor_verified: boolean } | { is_doctor_verified: boolean }[] | null;
 }
-export const mapRow = (r: SearchRow): PatientSearchResult => ({
+const mapRow = (r: SearchRow): PatientSearchResult => ({
   patient_id: r.patient_id, patient_code: r.patient_code, qr_token: r.qr_token,
   full_name: r.accounts?.full_name || 'Unknown Patient', age: r.age, blood_group: r.blood_group,
   contact_phone: r.accounts?.contact_phone || '', emergency_contact_name: r.emergency_contact_name,
   emergency_contact_phone: r.emergency_contact_phone, emergency_contact_relation: r.emergency_contact_relation,
   is_doctor_verified: Boolean(Array.isArray(r.clinical_records) ? r.clinical_records[0]?.is_doctor_verified : r.clinical_records?.is_doctor_verified),
 });
-export const mapPatientSearchRow = mapRow;
 
 const SF = 'patient_id,patient_code,qr_token,age,blood_group,emergency_contact_name,emergency_contact_phone,emergency_contact_relation,accounts!inner(id,full_name,contact_phone),clinical_records(is_doctor_verified)';
 

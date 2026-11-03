@@ -13,6 +13,7 @@ export interface ModalProps {
   description?: string;
   children: React.ReactNode;
   isDestructive?: boolean;
+  footer?: React.ReactNode;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -22,6 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   children,
   isDestructive = false,
+  footer,
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
@@ -153,6 +155,7 @@ export const Modal: React.FC<ModalProps> = ({
               )}
             </div>
             <div className="mt-2">{children}</div>
+            {footer && <div className="mt-4 pt-4 border-t border-black/5">{footer}</div>}
           </motion.div>
         </div>
       )}

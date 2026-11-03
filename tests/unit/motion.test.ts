@@ -120,7 +120,7 @@ describe('Tier 2: Apple Motion Physics — Invariants & Motion Safety', () => {
   });
 
   it('T2-MOTION-08: confirms mass equals 1 on all spring configurations', () => {
-    expect(appleSpring.mass).toBe(1);
-    expect(segmentedPillTransition.mass).toBe(1);
+    expect((appleSpring as { mass?: number }).mass).toBe(1);
+    expect((segmentedPillTransition as { mass?: number }).mass).toBe(1);
   });
 });

@@ -84,7 +84,7 @@ export const PatientSearchBar: React.FC<PatientSearchBarProps> = ({
       setActiveIndex((prev) => (prev > 0 ? prev - 1 : results.length - 1));
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      if (activeIndex >= 0 && activeIndex < results.length) {
+      if (activeIndex >= 0 && activeIndex < results.length && results[activeIndex]) {
         handleSelect(results[activeIndex]);
       }
     } else if (e.key === 'Escape') {
