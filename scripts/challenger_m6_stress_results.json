@@ -1,0 +1,170 @@
+[
+  {
+    "scenario": "SCENARIO-1",
+    "test_id": "N2-01-DOM-EXISTENCE",
+    "desc": "DoctorWorkspace unconditionally renders PatientSafetyBanner when patient is active",
+    "passed": true,
+    "details": ""
+  },
+  {
+    "scenario": "SCENARIO-1",
+    "test_id": "N2-02-STICKY-CSS",
+    "desc": "PatientSafetyBanner enforces sticky top-0 z-30",
+    "passed": false,
+    "details": "Missing sticky top-0 z-30"
+  },
+  {
+    "scenario": "SCENARIO-1",
+    "test_id": "N2-03-MANDATORY-FIELDS",
+    "desc": "Banner renders all 4 mandatory patient identity fields + ICE contact",
+    "passed": true,
+    "details": "Name:True, Code:True, Age:True, Blood:True, ICE:True, ICE_Phone:True"
+  },
+  {
+    "scenario": "SCENARIO-1",
+    "test_id": "N2-04-READ-ONLY",
+    "desc": "Banner is strictly read-only with ZERO input/textarea/select/editable fields",
+    "passed": true,
+    "details": "Inputs:False, Textareas:False, Selects:False"
+  },
+  {
+    "scenario": "SCENARIO-1",
+    "test_id": "N2-05-GRACEFUL-FALLBACK",
+    "desc": "Banner handles missing optional data, age=0, unknown blood group without crash",
+    "passed": true,
+    "details": "CaseA:True, CaseB:True, CaseC:True"
+  },
+  {
+    "scenario": "SCENARIO-2",
+    "test_id": "BOUND-01-ARRAY-MAX-50",
+    "desc": "doctorClinicalRecordUpdateSchema enforces max(50) for all 4 clinical arrays",
+    "passed": true,
+    "details": "Cond:True, Meds:True, Surg:True, Allr:True"
+  },
+  {
+    "scenario": "SCENARIO-2",
+    "test_id": "BOUND-02-50-ITEMS-ACCEPTED",
+    "desc": "Array of exactly 50 items accepted for all clinical lists",
+    "passed": true,
+    "details": "Errors: {}"
+  },
+  {
+    "scenario": "SCENARIO-2",
+    "test_id": "BOUND-03-51-ITEMS-REJECTED",
+    "desc": "Submitting 51 items strictly rejected across all clinical arrays",
+    "passed": true,
+    "details": "51_Cond_Err:Maximum 50 items allowed (got 51), 51_Allr_Err:Maximum 50 items allowed (got 51)"
+  },
+  {
+    "scenario": "SCENARIO-2",
+    "test_id": "BOUND-04-APPT-REASON-BOUNDS",
+    "desc": "Appointment reason bounds (min 2, max 200) strictly enforced",
+    "passed": true,
+    "details": "1_char:True, 2_char:True, 200_char:True, 201_char:True"
+  },
+  {
+    "scenario": "SCENARIO-2",
+    "test_id": "BOUND-05-CLINICAL-NOTES-MAX-1000",
+    "desc": "Clinical notes boundary (max 1000 chars) strictly enforced",
+    "passed": true,
+    "details": "1000_char:True, 1001_char:True"
+  },
+  {
+    "scenario": "SCENARIO-3",
+    "test_id": "SEARCH-01-LENGTH-BOUNDS",
+    "desc": "Search enforces min 2 chars (returns empty) and max 100 chars (rejects with error)",
+    "passed": true,
+    "details": "min_2:True, max_100:True"
+  },
+  {
+    "scenario": "SCENARIO-3",
+    "test_id": "SEARCH-02-INJECTION-SANITIZATION",
+    "desc": "escapeSearchTerm strips %, _, (, ), , and preserves Unicode & emojis",
+    "passed": true,
+    "details": ""
+  },
+  {
+    "scenario": "SCENARIO-3",
+    "test_id": "SEARCH-03-ROUTING-CLASSIFICATION",
+    "desc": "Multi-modal classifier accurately routes codes, UUIDs, phones, and safely falls back for malformed tokens",
+    "passed": false,
+    "details": ""
+  },
+  {
+    "scenario": "SCENARIO-4",
+    "test_id": "APPT-01-STATUS-CONSTRAINTS",
+    "desc": "Status enum ('scheduled', 'completed', 'cancelled') enforced in both Zod and DB CHECK constraint",
+    "passed": true,
+    "details": "Zod_Enum:True, DB_CHECK:True"
+  },
+  {
+    "scenario": "SCENARIO-4",
+    "test_id": "APPT-02-INVALID-STATUS-REJECTED",
+    "desc": "Invalid status values ('in-progress', uppercase 'COMPLETED', etc.) strictly rejected",
+    "passed": true,
+    "details": ""
+  },
+  {
+    "scenario": "SCENARIO-4",
+    "test_id": "APPT-03-D8-TRIGGER-IMPLEMENTATION",
+    "desc": "on_appointment_completed syncs date and summary while toggling umbrella.skip_stamp",
+    "passed": true,
+    "details": "StatusCheck:True, SkipOn:True, SkipOff:True, DateSync:True, SummarySync:True"
+  },
+  {
+    "scenario": "SCENARIO-4",
+    "test_id": "APPT-04-D8-NO-VERIFY-FLIP",
+    "desc": "stamp_clinical_update skips verification flip when umbrella.skip_stamp = 'on' (D8 Invariant)",
+    "passed": true,
+    "details": ""
+  },
+  {
+    "scenario": "SCENARIO-4",
+    "test_id": "APPT-05-DOCTOR-ID-SECURITY",
+    "desc": "Appointment creation binds doctor_id to authenticated caller auth.uid() in both Server Action and Postgres RLS",
+    "passed": true,
+    "details": "ActionBind:True, RLSCheck:True"
+  },
+  {
+    "scenario": "SCENARIO-5",
+    "test_id": "A11Y-01-BANNER-TOUCH-TARGETS",
+    "desc": "Safety Banner tel: link and switch button have >= 44px min touch target",
+    "passed": true,
+    "details": "Tel:True, Switch:True"
+  },
+  {
+    "scenario": "SCENARIO-5",
+    "test_id": "A11Y-02-SEARCH-TOUCH-TARGETS",
+    "desc": "Search input and dropdown option items have min-h-[44px]",
+    "passed": true,
+    "details": "Input:True, Options:True"
+  },
+  {
+    "scenario": "SCENARIO-5",
+    "test_id": "A11Y-03-EDITOR-TOUCH-TARGETS",
+    "desc": "Editor inputs, save button, and delete controls enforce min-h-[44px]",
+    "passed": true,
+    "details": "Inputs:True, Save:True, Delete:True"
+  },
+  {
+    "scenario": "SCENARIO-5",
+    "test_id": "A11Y-04-APPOINTMENT-TOUCH-TARGETS",
+    "desc": "Appointment management buttons and modal controls enforce min-h-[44px]",
+    "passed": true,
+    "details": "ApptBtn:True, ModalInputs:True, ModalBtn:True"
+  },
+  {
+    "scenario": "SCENARIO-5",
+    "test_id": "A11Y-05-DESIGN-SYSTEM-CONTRAST",
+    "desc": "Clinical status alerts utilize design system contrast tokens (D10)",
+    "passed": true,
+    "details": "Critical:True, Verified:True, Pending:True"
+  },
+  {
+    "scenario": "SCENARIO-5",
+    "test_id": "A11Y-06-NESTED-TARGET-AUDIT",
+    "desc": "Audit of nested micro-controls (tag remove button h-4 w-4, clear search h-8 w-8)",
+    "passed": true,
+    "details": "Documented in challenge report with usability analysis"
+  }
+]

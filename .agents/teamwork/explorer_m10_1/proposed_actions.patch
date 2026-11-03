@@ -1,0 +1,21 @@
+--- a/src/app/portal/doctor/actions.ts
++++ b/src/app/portal/doctor/actions.ts
+@@ -88,16 +88,16 @@
+     else if (cls.type === 'phone') {
+       const [acc, em] = await Promise.all([
+-        qp().ilike('accounts.contact_phone', %%).limit(20),
+-        qp().ilike('emergency_contact_phone', %%).limit(20),
++        qp().ilike('accounts.contact_phone', `%${cls.sanitized}%`).limit(20),
++        qp().ilike('emergency_contact_phone', `%${cls.sanitized}%`).limit(20),
+       ]);
+       if (acc.error) throw acc.error;
+       if (em.error) throw em.error;
+       const m = new Map<string, PatientSearchResult>();
+       ([...(acc.data || []), ...(em.data || [])] as unknown as SearchRow[]).forEach((r) => m.set(r.patient_id, mapRow(r)));
+       return { ok: true, data: Array.from(m.values()).slice(0, 20) };
+     } else {
+-      res = await qp().ilike('accounts.full_name', %%).limit(20);
++      res = await qp().ilike('accounts.full_name', `%${cls.sanitized}%`).limit(20);
+     }
+     if (res.error) throw res.error;
+     return { ok: true, data: ((res.data || []) as unknown as SearchRow[]).map(mapRow) };

@@ -1,0 +1,38 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "description": "Persistent memory graph for tracking entities, relations, and architectural state across sessions"
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server"
+      ],
+      "env": {
+        "SUPABASE_URL": "https://YOUR_PROJECT_ID.supabase.co",
+        "SUPABASE_ANON_KEY": "YOUR_SUPABASE_ANON_KEY",
+        "SUPABASE_ACCESS_TOKEN": "OPTIONAL_PERSONAL_ACCESS_TOKEN_FOR_MANAGEMENT_API"
+      },
+      "description": "Supabase Postgres management, schema inspection, and RLS policy verification"
+    },
+    "vercel": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@vercel/mcp"
+      ],
+      "env": {
+        "VERCEL_TOKEN": "PLACEHOLDER_FOR_DEPLOYMENT_STAGES",
+        "VERCEL_PROJECT_ID": "PLACEHOLDER_PROJECT_ID",
+        "VERCEL_TEAM_ID": "PLACEHOLDER_TEAM_ID"
+      },
+      "description": "Vercel integration for deployment stages, environment variables, and build inspections"
+    }
+  }
+}

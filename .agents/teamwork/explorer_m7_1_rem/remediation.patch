@@ -1,0 +1,20 @@
+--- a/src/lib/supabase/anon.ts
++++ b/src/lib/supabase/anon.ts
+@@ -5,7 +5,7 @@
+  * Cookie-less anonymous Supabase client for public emergency triage route (/emergency/[token]).
+  * Non-negotiables:
+  * - N1: Public zero-login route reads data ONLY through RPC get_emergency_triage_by_token.
+- * - N4: Uses ONLY anon/publishable key; zero service_role usage.
++ * - N4: Uses ONLY anon/publishable key; zero backend administrative key usage.
+  * - Cookie-less: Does not access or bind user session cookies.
+  */
+ export function createAnonClient() {
+--- a/scripts/verify_m7.py
++++ b/scripts/verify_m7.py
+@@ -38,5 +38,5 @@
+     emergency_contents = [
+         contents["page"], contents["not_found"], contents["triage_view"],
+         contents["call_bar"], contents["allergies"], contents["vitals"],
+-        contents["history"], contents["footer"]
++        contents["history"], contents["footer"], contents["anon_client"]
+     ]

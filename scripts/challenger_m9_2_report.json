@@ -1,0 +1,14 @@
+{
+  "verdict": "APPROVE",
+  "all_ok": true,
+  "counts": {
+    "tier1": 84,
+    "tier2": 84,
+    "tier3": 16,
+    "tier4": 8,
+    "tier5": 14,
+    "total": 206
+  },
+  "m9_checks_passed": 52,
+  "findings": []
+}

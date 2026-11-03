@@ -1,0 +1,44 @@
+--- a/src/components/emergency/triage-vitals-card.tsx
++++ b/src/components/emergency/triage-vitals-card.tsx
+@@ -30,7 +30,7 @@
+         className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold select-none ${
+           isDoctorVerified
+             ? 'bg-clinical-verified/10 text-clinical-verified-text border border-clinical-verified/30'
+-            : 'bg-clinical-attention/10 text-clinical-attention-text border border-clinical-attention/30'
++            : 'bg-clinical-pending/10 text-clinical-pending-text border border-clinical-pending/30'
+         }`}
+       >
+         {isDoctorVerified ? (
+@@ -40,7 +40,7 @@
+           </>
+         ) : (
+           <>
+-            <AlertTriangle className="w-4 h-4 text-clinical-attention shrink-0" aria-hidden="true" />
++            <AlertTriangle className="w-4 h-4 text-clinical-pending shrink-0" aria-hidden="true" />
+             <span>Self-Reported Baseline (Unverified)</span>
+           </>
+         )}
+--- a/src/components/emergency/triage-allergies-alert.tsx
++++ b/src/components/emergency/triage-allergies-alert.tsx
+@@ -32,8 +32,8 @@
+       className="bg-surface rounded-2xl p-5 border-2 border-clinical-critical bg-clinical-critical/5 shadow-sm"
+     >
+       <div className="flex items-center gap-2 mb-3">
+-        <AlertOctagon className="w-5 h-5 text-clinical-critical shrink-0" aria-hidden="true" />
+-        <h3 className="text-xs font-extrabold uppercase tracking-wider text-clinical-critical">
++        <AlertOctagon className="w-5 h-5 text-clinical-critical-text shrink-0" aria-hidden="true" />
++        <h3 className="text-xs font-extrabold uppercase tracking-wider text-clinical-critical-text">
+           CRITICAL ALLERGIES ALERT
+         </h3>
+       </div>
+--- a/src/app/emergency/[token]/not-found.tsx
++++ b/src/app/emergency/[token]/not-found.tsx
+@@ -28,7 +28,7 @@
+ 
+         {/* Life-Safety Guidance & 56px Call Button */}
+         <div className="bg-surface rounded-2xl p-5 border border-black/10 shadow-sm text-left space-y-3">
+-          <p className="text-xs font-bold uppercase tracking-wider text-clinical-critical">
++          <p className="text-xs font-bold uppercase tracking-wider text-clinical-critical-text">
+             Immediate Assistance
+           </p>
+           <p className="text-sm text-text-body-secondary leading-relaxed">
