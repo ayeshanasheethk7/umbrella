@@ -15,7 +15,24 @@ The agent updates this at the end of every phase.
 | 8 | Doctor portal: appointments + escalation | done | Milestone M6 |
 | 9 | Marketing landing page | done | Milestone M4, M5 |
 | 10 | QA, Audit and hardening | done | Milestone M9, M10 |
-| 11 | Deploy | ready | Milestone M11 (docs/DEPLOY.md) |
+| 11 | Deploy & Mock Launch | done | Milestone M11 (docs/DEPLOY.md) |
+
+## Milestone M11 Deliverables (Mock Launch, Visual Aesthetics, Supabase Integration & Production Verification)
+- **Host Toolchain & Build Verification**:
+  1. Set up Node.js v22.14.0 and Git 2.48.1 runtime toolchain.
+  2. Executed complete test and validation matrix: `typecheck` (0 errors), `lint` (0 errors), `test` (168/168 unit tests passed), `next build` (clean exit code 0).
+  3. Character budget (Rule 12k): All files in `src/` remain strictly < 12,000 characters.
+- **Supabase Production Database Integration**:
+  1. Applied `supabase/migrations/0001_umbrella_schema.sql` on project `cuvtgjkomkwtbpabmbmu` (`medi_qr_wen`).
+  2. Populated synthetic test records (`supabase/seed.sql`) across doctors, patients, clinical records, and appointments.
+  3. Fixed GoTrue identity record generation and empty string `confirmation_token` constraint scanning in `auth.users`.
+  4. Successfully verified real Supabase Auth `signInWithPassword` and session handoff for Doctor and Patient accounts.
+- **Mock Launch Browser Telemetry & Visual Audit**:
+  1. Started local Next.js dev server connected to production Supabase.
+  2. Executed automated headless Playwright audit via Microsoft Edge across Mobile (`375×667`) and Desktop (`1280×800`).
+  3. Evaluated Landing page, Emergency Triage page, Login/Signup pages, and authenticated Patient & Doctor portals.
+  4. Verified sticky 56px red emergency call button, Apple spring physics (`stiffness: 400, damping: 30`), and 0 kB framer-motion bundle constraint on triage route (D13).
+  5. Saved high-fidelity full-page screenshots to `docs/screenshots/` and generated `visual_aesthetics_and_telemetry_report.md`.
 
 ## Milestone M10 Deliverables (Granular 28-Point System Audit & Final Remediation)
 - **Remediation Punchlist Completed**:
